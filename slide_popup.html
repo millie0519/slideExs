@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=10,user-scalable=yes">
+	<title>Swiper - 슬라이드 팝업</title>	
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="./asset/css/reset_v1.2.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<style>
+		body{background:#f6e6e6;}
+		img{display: block;}
+
+		.swiper-button-next,
+		.swiper-button-prev{color:#000; z-index: 2; transition: transform 0.5s;}
+		.swiper-button-next{right:-50px;}
+		.swiper-button-prev{left:-50px;}
+		.swiper-button-next:hover{transform: translateX(10px);}
+		.swiper-button-prev:hover{transform: translateX(-10px);}
+		.swiper-pagination{bottom:-40px !important;}
+		.swiper-pagination-bullet{background-color:#bd3737; transition: width 0.3s;}
+		.swiper-pagination-bullet.swiper-pagination-bullet-active{width: 17px; border-radius: 5px;}
+
+		.main-slide{position: relative; width: 100%; margin-top: 20vw;}
+		.main-slide .swiper-container{overflow:hidden; width:100vw; margin:0 auto;}
+		.main-slide .swiper-slide{cursor:pointer;}
+		.main-slide .swiper-slide img{width: 100%;}
+		.main-slide .swiper-slide::before{display:block; position:absolute; width:100%; height:100%; background:#00000070; opacity:0; transition:opacity 0.4s; content:'';}
+		.main-slide .swiper-slide::after{
+			display:block; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); transition:opacity 0.4s;
+			width:80px; height:80px; color:#fff; font-size:24px; line-height:80px; text-align:center; border:1px solid #ffffffc4; border-radius:50%; content:'view'; opacity:0;
+		}
+		.main-slide .swiper-slide:hover::before,.main-slide .swiper-slide:hover::after{opacity:1;}
+
+		.popup-slide{display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:11;}
+		.popup-slide .swiper{width:95vw; max-width:1420px; overflow:hidden;}
+		.popup-slide .swiper-slide img{width: 100%;}
+		.popup-slide .swiper-button-next, .popup-slide .swiper-button-prev{color:#fff; z-index:10;}
+		.popup-slide .swiper-pagination-bullet{background-color:#fff !important;}
+		.popup-slide .btn-clse{position:absolute; top:-50px; right:0px;}
+		.popup-slide .btn-clse svg{transition: transform 0.4s;}
+		.popup-slide .btn-clse:hover svg{transform: rotate(180deg);}
+		.popupdummy{display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:#000; opacity:0.7; z-index: 10;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="main-slide">
+			<div class="swiper">
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/usa.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/england.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/france.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/italy.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/russia.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/egypt.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/india.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/japan.jpg" alt="#">
+					</li>
+				</ul>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>	
+	
+		<div class="popup-slide">
+			<button type="button" onclick="pophide();" class="btn-clse">
+				<svg width="35" height="35" stroke-width="1" stroke="#fff">
+					<line x1="0" y1="0" x2="35" y2="35" />
+					<line x1="0" y1="35" x2="35" y2="0" />
+				</svg>
+			</button>
+	
+			<div class="swiper">
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/usa.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/england.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/france.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/italy.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/russia.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/egypt.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/india.jpg" alt="#">
+					</li>
+					<li class="swiper-slide">
+						<img src="https://travel-slider.uiinitiative.com/images/japan.jpg" alt="#">
+					</li>
+				</ul>
+			</div>
+			<div class="swiper-button-next" onclick="console.log('click')"></div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="popupdummy"></div>
+	</div>
+</body>
+
+<script>
+	var mainslide = new Swiper(".main-slide .swiper", {
+		// loop: true,
+		speed: 1500,
+		slidesPerView: 2.5,
+		spaceBetween: 15,
+		autoplay: {
+			delay: 3000,
+			disableOnInteraction: false,
+			pauseOnMouseEnter: true,
+		},
+		pagination: {
+			el: ".main-slide .swiper-pagination",
+			clickable: true,
+		},
+		breakpoints:{
+			600:{
+				slidesPerView: 3.2,
+			},
+			1024:{
+				slidesPerView: 4.2,
+			}
+		}
+	});
+
+	var popslide = new Swiper(".popup-slide .swiper", {
+		// loop: true,
+		speed: 1500,
+		spaceBetween: 20,
+		navigation: {
+			nextEl: ".popup-slide .swiper-button-next",
+			prevEl: ".popup-slide .swiper-button-prev",
+		},
+		pagination: {
+			el: ".popup-slide .swiper-pagination",
+			clickable: true,
+		},
+		observer: true,
+		observeParents: true,
+	});
+
+	$(document).on('click', '.main-slide .swiper-slide' ,function(){
+		var slideNum = mainslide.clickedIndex;
+
+		$('.popup-slide').show();
+		$('.popupdummy').show();
+
+		popslide.slideTo(slideNum);
+	});
+
+	function pophide(){
+		$('.popup-slide').hide();
+		$('.popupdummy').hide();
+	}
+</script>
+
+</html>
