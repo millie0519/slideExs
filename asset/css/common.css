@@ -1,0 +1,46 @@
+/* font-size */
+.f60 { font-size: 60px !important; }
+.f58 { font-size: 58px !important; }
+.f56 { font-size: 56px !important; }
+.f54 { font-size: 54px !important; }
+.f52 { font-size: 52px !important; }
+.f50 { font-size: 50px !important; }
+.f48 { font-size: 48px !important; }
+.f46 { font-size: 46px !important; }
+.f44 { font-size: 44px !important; }
+.f42 { font-size: 42px !important; }
+.f40 { font-size: 40px !important; }
+.f38 { font-size: 38px !important; }
+.f36 { font-size: 36px !important; }
+.f34 { font-size: 34px !important; }
+.f32 { font-size: 32px !important; }
+.f30 { font-size: 30px !important; }
+.f28 { font-size: 28px !important; }
+.f26 { font-size: 26px !important; }
+.f24 { font-size: 24px !important; }
+.f22 { font-size: 22px !important; }
+.f20 { font-size: 20px !important; }
+.f18 { font-size: 18px !important; }
+.f16 { font-size: 16px !important; }
+.f15 { font-size: 15px !important; }
+.f14 { font-size: 14px !important; }
+
+@media screen and (max-width: 1280px) {
+	.f56 { font-size: 50px !important; }
+	.f20 { font-size: 18px !important; }
+}
+
+@media screen and (max-width: 1024px) {
+	.f56 { font-size: 44px !important; }
+	.f20 { font-size: 17px !important; }
+}
+
+@media screen and (max-width: 768px) {
+	.f56 { font-size: 36px !important; }
+	.f20 { font-size: 16px !important; }
+}
+
+@media screen and (max-width: 500px) {
+	.f56 { font-size: 30px !important; }
+	.f20 { font-size: 15px !important; }
+}
