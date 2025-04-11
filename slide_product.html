@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=10,user-scalable=yes">
+	<title>Swiper - 상품 슬라이드</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="./asset/css/reset_v1.2.css">
+	<link rel="stylesheet" href="./asset/css/slide.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<style>
+		body{background-color: #f5f5f5; font-family: "Roboto Condensed", sans-serif;}
+		.en{font-family: "Montserrat", sans-serif !important;}
+		.wrap{display: flex; align-items: center; height: 100vh;}
+		.wrap .container{width: 100%;}
+
+		h1{text-align: center; font-weight: 700; font-size: 40px; position: relative; z-index: 2;}
+		.card-slide{width: 100%;}
+		.card-slide .swiper-slide{opacity: 0.4; transition: opacity 0.4s;}
+		.card-slide .swiper-slide img{transform: scale(0.7) rotate(-15deg); transition: transform 0.4s;}
+		.card-slide .btm{display: flex; justify-content: center; margin-top: 3vw;}
+		.card-slide .swiper-pagination{position: unset; width: 60px; background-color: #e5e5e5; text-align: center; padding: 5px 0; border-radius: 5px;}
+		.card-slide .txt-box{margin-top: -4vw; position: relative; z-index: 1; padding: 0 20px; visibility: hidden;}
+		.card-slide .txt-box h2,
+		.card-slide .txt-box p{
+			transform: translateX(-60px); opacity: 0; transition: transform 0.6s, opacity 0.6s;
+		}
+		.card-slide .txt-box h2{
+			font-size: 24px;  font-weight: 600; margin-bottom: 15px; line-height: 1.3em;
+			transition-delay: 0.1s;
+		}
+		.card-slide .txt-box p{transition-delay: 0.3s;}
+
+		/* active */
+		.card-slide .swiper-slide.swiper-slide-active{opacity: 1;}
+		.card-slide .swiper-slide.swiper-slide-active img{transform: scale(1) rotate(0);}
+		.card-slide .swiper-slide.swiper-slide-active .txt-box{visibility: visible;}
+		.card-slide .swiper-slide.swiper-slide-active .txt-box h2{transform: translateX(0); opacity: 1;}
+		.card-slide .swiper-slide.swiper-slide-active .txt-box p{transform: translateX(0); opacity: 1;}
+
+		/* wheel-box */
+		.wheel-box-wrap{position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10;}
+		.wheel-box{padding: 15px; text-align: center; background-color: rgb(229 229 229 / 65%); border-radius: 10px; animation: appearance 1s forwards;}
+		.wheel-box svg{width: 35px; height: 35px; margin-bottom: 5px; animation: bounce 0.6s infinite alternate;}
+		@keyframes bounce {
+			0%{transform: translateY(0);}
+			70%{transform: translateY(-2px);}
+			100%{transform: translateY(2px);}
+		}
+		@keyframes appearance {
+			0%{opacity: 0; margin-top: -50px;}
+			100%{opacity: 1; margin-top: 0;}
+		}
+
+		/* Media Query */
+		@media screen and (max-width:1024px) {
+			.wheel-box-wrap{display: none;}
+		}
+		@media screen and (max-width:900px) {
+			body{font-size: 15px;}
+			h1{font-size: 36px;}
+			.card-slide .txt-box{padding: 0;}
+			.card-slide .txt-box h2{font-size: 22px;}
+		}
+		@media screen and (max-width:500px) {
+			body{font-size: 14px;}
+			h1{font-size: 32px;}
+			.card-slide .txt-box{margin-top: -8vw;}
+			.card-slide .txt-box h2{font-size: 20px; margin-bottom: 10px;}
+		}		
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="container">
+			<h1 class="en">WEEKLY BEST</h1>
+			<div class="card-slide">
+				<div class="swiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20240418093653867001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Lorem Ipsum</h2>
+								<p>Aliquam vitae rhoncus purus. Phasellus imperdiet, felis non lacinia finibus, ante diam mollis sem, id iaculis orci lorem ut lorem</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20240610112222978001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Phasellus quis lobortis ante</h2>
+								<p>Cras varius ante lorem. Fusce eu nibh id neque ornare semper eu scelerisque nulla. Nullam sollicitudin sit amet tortor nec accumsan. Maecenas a odio eget nisl suscipit malesuada. Curabitur ultrices finibus felis, non vulputate dui sodales gravida</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20241126162746837001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Aliquam eleifend est eu pretium rhoncus</h2>
+								<p>Quisque vestibulum diam vitae porttitor mattis</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20241224111650829001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Nam sed hendrerit</h2>
+								<p>Curabitur in lorem id eros pretium rhoncus et sit amet tellus. Pellentesque vel augue tempus, commodo augue non, consectetur libero</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20250212102340976001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Maecenas porta</h2>
+								<p>Pellentesque ligula sem, ullamcorper in facilisis et, tempus pellentesque libero. Cras congue sem sed venenatis tincidunt.</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20250307123559937001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Sed ultrices sodales</h2>
+								<p>In laoreet mi sed quam tincidunt tempus. Sed condimentum pharetra erat. Phasellus molestie varius fringilla. In commodo eleifend massa ut convallis.</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20250320124525691001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Quisque sit amet</h2>
+								<p>Morbi viverra id ipsum in auctor.</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20250321092803799001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Morbi pretium</h2>
+								<p>Cras nibh eros, aliquam et nisi id, interdum lobortis lacus. Suspendisse sed eleifend lacus. Aliquam accumsan tincidunt metus, vel interdum odio elementum at.</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20250402123135701001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Suspendisse</h2>
+								<p>Mauris lorem justo, malesuada nec vehicula eget, venenatis in purus. Sed imperdiet pharetra metus vel egestas. Phasellus purus nunc, ornare vitae tortor ut, dapibus bibendum velit.</p>
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="./asset/images/card/NB20250404093602230001.jpg" alt="">
+							<div class="txt-box">
+								<h2 class="en">Sed pretium ultricies sem</h2>
+								<p>Nunc et metus leo. Maecenas sit amet lectus in erat gravida ornare</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="btm">
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+		</div>
+		<div class="wheel-box-wrap">
+			<div class="wheel-box">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="#333" class="bi bi-mouse" viewBox="0 0 16 16">
+					<path d="M8 3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 3m4 8a4 4 0 0 1-8 0V5a4 4 0 1 1 8 0zM8 0a5 5 0 0 0-5 5v6a5 5 0 0 0 10 0V5a5 5 0 0 0-5-5"/>
+				 </svg>
+				<p>You can use<br>the mouse wheel !</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var swiper = new Swiper(".card-slide .swiper", {
+		loop: true,
+		loopedSlides: 2,
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 1.5,
+		mousewheel: true,
+		spaceBetween: -30,
+      pagination: {
+			el: '.swiper-pagination',
+			type: "fraction",
+			renderFraction: function (currentClass, totalClass) {
+				return '<span class="' + currentClass + '"></span>' + ' / ' + '<span class="' + totalClass + '"></span>';
+			}
+      },
+		breakpoints: {
+			500:{
+				slidesPerView: 2,
+			},
+			900: {
+					slidesPerView: 2.8,
+			},
+			1300: {
+					slidesPerView: 3.8,
+			},
+		},
+		on: {
+			slideChangeTransitionEnd: function () {
+				$('.wheel-box-wrap').fadeOut(500);
+			},
+		}
+   });
+</script>
+
+</html>
